@@ -67,7 +67,7 @@
       <div class="brand-header-grid">
         <div class="brand-logo-left">
           <a href="https://www.pccoepune.com/" class="logo-link" title="PCCOE Pune Official Website" target="_blank" rel="noopener noreferrer">
-            <img src="https://computer.pccoepune.com/assets/images/PCCoE-LOGO/pccoe-logo.webp" alt="PCCoE Logo" class="main-logo-img">
+            <img src="assets/images/logo/pccoe-logo.webp" alt="PCCoE Logo" class="main-logo-img">
           </a>
         </div>
         <div class="brand-text-center">
@@ -90,7 +90,7 @@
         </div>
         <div class="brand-logo-right">
           <a href="http://pcet.org.in/" class="logo-link" title="PCET Trust Portal" target="_blank" rel="noopener noreferrer">
-            <img src="https://computer.pccoepune.com/assets/images/PCCoE-LOGO/pcet-trust-logo.webp" alt="PCET Trust Logo" class="trust-logo-img">
+            <img src="assets/images/logo/pcet-trust-logo.webp" alt="PCET Trust Logo" class="trust-logo-img">
           </a>
         </div>
       </div>

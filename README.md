@@ -10,7 +10,7 @@ content for IT taken from [it.pccoepune.com](https://it.pccoepune.com/).
 ## How to open it
 
 Double-click **`index.html`**. That's it. No installation, no server, no build step.
-An internet connection is needed for the fonts, icons, Tailwind and the college logos.
+An internet connection is needed for the fonts, icons, and Tailwind. All photos and logos are stored locally in `assets/images/`.
 
 ## Folder structure
 
@@ -30,7 +30,7 @@ information-technology/
 │   ├── js/
 │   │   ├── tailwind-config.js ← PCCOE colour palette for Tailwind classes
 │   │   └── main.js            ← Slider, counters, scroll animations, menu, search
-│   └── images/                ← Banner photos and HOD photo (see images/README.md)
+│   └── images/                ← Official photos: banners, gallery, HOD, logos (see images/README.md)
 │
 └── README.md                  ← This file
 ```
@@ -63,8 +63,8 @@ A side menu highlights the section you are reading.
 | Change the scrolling news ticker   | `components/header.js`        | Edit the `items` list in `tickerItems` |
 | Change footer address / links      | `components/footer.js`        | Edit the footer columns |
 | Add something to search (Ctrl + K) | `assets/js/main.js`           | Add a line to `SEARCH_ITEMS` |
-| Add banner photos                  | `assets/images/banners/`      | Save as `slide-1.jpg` … `slide-4.jpg` |
-| Add the HOD photo                  | `assets/images/`              | Save as `hod.jpg` |
+| Change banner photos               | `assets/images/banners/`      | Replace a file, or change the path in `index.html` |
+| Change the HOD photo               | `assets/images/`              | Replace `hod.jpg` |
 | Make anything fade in on scroll    | any page                      | Add `class="reveal"` to the element |
 | Change brand colours               | `assets/css/header-footer.css` (`:root`) and `assets/js/tailwind-config.js` | Keep both in sync |
 
