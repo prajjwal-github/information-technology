@@ -323,8 +323,10 @@
         <div class="lg:col-span-2 flex justify-center reveal reveal-zoom">
           <div class="relative">
             <div class="w-56 h-56 sm:w-64 sm:h-64 rounded-full bg-white/10 border-2 border-white/20 grid place-items-center backdrop-blur">
-              <div class="w-44 h-44 sm:w-52 sm:h-52 rounded-full bg-white grid place-items-center">
+              <div class="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full bg-white grid place-items-center overflow-hidden">
                 <span class="font-display font-extrabold text-6xl text-navy">JK</span>
+                <!-- HOD photo: assets/images/hod.jpg (initials show if the photo is missing) -->
+                <img src="assets/images/hod.jpg" alt="Dr. Jayashree V. Katti" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()">
               </div>
             </div>
             <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap bg-gold text-navy-darkest text-xs font-extrabold uppercase tracking-wider px-4 py-2 rounded-full shadow-lg">Head of Department</span>
