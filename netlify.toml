@@ -1,0 +1,8 @@
+# Netlify cannot run PHP, so it first turns the PHP pages into plain HTML
+# (build.php) and then publishes the dist/ folder.
+[build]
+  command = "php build.php"
+  publish = "dist"
+
+[build.environment]
+  PHP_VERSION = "8.2"

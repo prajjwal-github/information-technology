@@ -23,6 +23,15 @@ php -S localhost:8000 router.php
 
 then open http://localhost:8000. An internet connection is needed for the fonts and icons.
 
+## Hosting on Netlify
+
+Netlify only serves plain HTML files and cannot run PHP. So `netlify.toml` tells Netlify to run
+`php build.php` first, which turns every PHP page into an HTML file in `dist/` and publishes that.
+Keep editing the PHP files; Netlify rebuilds the HTML on every push to GitHub.
+
+To make the HTML yourself (e.g. to drag and drop onto Netlify): run `php build.php` and upload
+the `dist/` folder. Never edit files inside `dist/`; they are overwritten on each build.
+
 ## Folder structure
 
 ```
@@ -56,6 +65,8 @@ information-technology/
 │   └── vendor/bootstrap/      ← Bootstrap 5.3.3 (stored locally)
 │
 ├── .htaccess                  ← Keeps page addresses like the official site (/hod opens hod.php)
+├── build.php                  ← Turns the PHP pages into plain HTML in dist/ (for Netlify)
+├── netlify.toml               ← Netlify settings: run build.php, publish dist/
 ├── router.php                 ← Same thing for the local `php -S` preview only
 └── README.md
 ```
