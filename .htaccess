@@ -1,0 +1,24 @@
+# ==========================================================================
+# Apache settings (most PHP hosting uses Apache)
+# Keeps the same page addresses as the official site, e.g. /hod opens hod.php
+# ==========================================================================
+Options -Indexes
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Old addresses that had capital letters -> lowercase address
+  RewriteRule ^Training$ training [R=301,L]
+
+  # /page -> page.php (when that file exists)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.php -f
+  RewriteRule ^([a-z0-9_-]+)$ $1.php [L]
+</IfModule>
+
+# Shared PHP parts are only included by pages, never opened directly
+<IfModule mod_alias.c>
+  RedirectMatch 404 /(includes|components|sections)/
+</IfModule>

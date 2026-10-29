@@ -2,81 +2,91 @@
 
 The revamped website of the **Department of Information Technology**, Pimpri Chinchwad College of
 Engineering (PCCOE), Pune. It uses the same header, footer and colour palette as the
-[Computer Department website](https://github.com/MayurKharat0390/PCCOE-Computer-Dept), with all new
-content for IT taken from [it.pccoepune.com](https://it.pccoepune.com/).
+[Computer Department website](https://github.com/MayurKharat0390/PCCOE-Computer-Dept). The content
+is copied as it is from [it.pccoepune.com](https://it.pccoepune.com/); only the design is new.
 
-**Phase 1 (done):** Home page and About Us page.
+**Built with:** HTML5, CSS3, Bootstrap 5.3 and PHP (no database).
 
-## How to open it
+**Status:** Home page (`index.php`) ready for approval. Other pages will be added after approval;
+until then their menu links open the page on the official site.
 
-Double-click **`index.html`**. That's it. No installation, no server, no build step.
-An internet connection is needed for the fonts, icons, and Tailwind. All photos and logos are stored locally in `assets/images/`.
+## How to run it
+
+**On a PHP server (Apache, e.g. XAMPP or the college hosting):** copy the folder into the web root
+(for XAMPP, `htdocs/information-technology`) and open `http://localhost/information-technology/`.
+
+**Without XAMPP:** if PHP is installed, open a terminal in this folder and run
+
+```
+php -S localhost:8000 router.php
+```
+
+then open http://localhost:8000. An internet connection is needed for the fonts and icons.
 
 ## Folder structure
 
 ```
 information-technology/
-├── index.html                 ← HOME PAGE (double-click to open the site)
-├── about.html                 ← ABOUT US PAGE
+├── index.php                  ← HOME PAGE: lists the page's parts in order
 │
-├── components/                ← Parts shared by every page (edit once, changes everywhere)
-│   ├── header.js              ← Top strip, college logo header, main menu, news ticker
-│   └── footer.js              ← Footer, back-to-top button, search pop-up
+├── includes/                  ← Shared by every page (edit once, changes everywhere)
+│   ├── config.php             ← Contact details, MAIN MENU links, helper functions
+│   ├── head.php               ← <head>: title, fonts, Bootstrap, CSS files
+│   ├── header.php             ← Top strip, college logo header, main menu, spotlight ticker
+│   └── footer.php             ← Footer, back-to-top button, search pop-up, JS files
+│
+├── components/
+│   └── ui.php                 ← Reusable elements: section_title(), action_button()
+│
+├── sections/
+│   └── home/                  ← One file per Home page section (content is at the top of each)
+│       ├── hero-notices.php   ← Photo slider + Notices / News & Announcements
+│       ├── about.php          ← About us + Mandatory Disclosure and PCET Brochure
+│       ├── dept-glance.php    ← IT Department at Glance (3 cards)
+│       ├── testimonials.php   ← Student Testimonials + Important Links
+│       ├── honours-video.php  ← Honour & Minor Courses, Swaratarang 2k24, Video Section
+│       └── popup.php          ← FDP 2026 poster shown when the page opens
 │
 ├── assets/
 │   ├── css/
-│   │   ├── header-footer.css  ← Header & footer design copied from the Computer dept site
-│   │   └── it-pages.css       ← Styles and animations for the IT pages
-│   ├── js/
-│   │   ├── tailwind-config.js ← PCCOE colour palette for Tailwind classes
-│   │   └── main.js            ← Slider, counters, scroll animations, menu, search
-│   └── images/                ← Official photos: banners, gallery, HOD, logos (see images/README.md)
+│   │   ├── style.css          ← Global styles + header & footer (from the Computer dept site)
+│   │   └── home.css           ← Home page styles
+│   ├── js/main.js             ← Menu, search (Ctrl + K), animations, notices scroll, pop-up
+│   ├── images/                ← Official photos and logos (see images/README.md)
+│   └── vendor/bootstrap/      ← Bootstrap 5.3.3 (stored locally)
 │
-└── README.md                  ← This file
+├── .htaccess                  ← Keeps page addresses like the official site (/hod opens hod.php)
+├── router.php                 ← Same thing for the local `php -S` preview only
+└── README.md
 ```
 
-## What is on each page
+## Page addresses (URLs)
 
-**Home (`index.html`)**
-1. Hero slider (4 slides, auto-plays, swipe on phones)
-2. Animated numbers: established 2001, intake 120, 24+ faculty, M.Tech intake 18
-3. About Us summary with "Department at a Glance" cards
-4. Programs offered: B.Tech IT and M.Tech AI & Data Science
-5. Honours & Minor courses: Data Science, AI & ML, Cyber Security, Blockchain
-6. From HOD's Desk (short)
-7. Faculty research expertise
-8. Student achievements and workshops
-9. Student testimonials slider
-10. Campus video tour, Mandatory Disclosure and PCET Brochure links
-11. Admissions call to action
+Addresses stay the same as on the official site, in lowercase: `/hod`, `/vision-mission`,
+`/faculty-profile`, and so on. A page is saved as `hod.php`, and `.htaccess` makes `/hod` open it.
+Old addresses with capital letters (such as `/Training`) redirect to the lowercase one.
 
-**About Us (`about.html`)**
-About Department and key facts, From HOD's Desk, Vision & Mission, Programs & Intake table,
-Milestones timeline, Academic Coordinators, Faculty Strength and Program Outcomes (PO1–PO12).
-A side menu highlights the section you are reading.
+The menu links work out where to go by themselves (`page_url()` in `includes/config.php`): once
+`hod.php` exists, every link to `hod` opens the new page; until then it opens the official site.
 
 ## Common edits
 
-| I want to…                         | Open this file                | What to do |
-|------------------------------------|-------------------------------|------------|
-| Change a menu link                 | `components/header.js`        | Edit the `<li>` lines in the menu |
-| Change the scrolling news ticker   | `components/header.js`        | Edit the `items` list in `tickerItems` |
-| Change footer address / links      | `components/footer.js`        | Edit the footer columns |
-| Add something to search (Ctrl + K) | `assets/js/main.js`           | Add a line to `SEARCH_ITEMS` |
-| Change banner photos               | `assets/images/banners/`      | Replace a file, or change the path in `index.html` |
-| Change the HOD photo               | `assets/images/`              | Replace `hod.jpg` |
-| Make anything fade in on scroll    | any page                      | Add `class="reveal"` to the element |
-| Change brand colours               | `assets/css/header-footer.css` (`:root`) and `assets/js/tailwind-config.js` | Keep both in sync |
+| I want to…                           | Open this file                     | What to do |
+|--------------------------------------|------------------------------------|------------|
+| Change a menu link                   | `includes/config.php`              | Edit `$NAV_MENU` |
+| Change phone / email / address       | `includes/config.php`              | Edit `$SITE` |
+| Change the spotlight ticker          | `includes/header.php`              | Edit `$spotlight` at the top |
+| Add a notice / news item             | `sections/home/hero-notices.php`   | Add a line at the top of `$news` |
+| Change slider photos                 | `sections/home/hero-notices.php`   | Edit `$slides` (photos in `assets/images/slider/2024/`) |
+| Change testimonials                  | `sections/home/testimonials.php`   | Edit `$testimonials` |
+| Remove the opening pop-up poster     | `index.php`                        | Delete the `popup.php` line |
+| Change brand colours                 | `assets/css/style.css`             | Edit the `:root` block |
+| Make anything fade in on scroll      | any section                        | Add `class="reveal"` to the element |
 
-## Adding a new page
+## Adding a new page (after approval)
 
-1. Copy `about.html` and rename it, e.g. `faculty.html`.
-2. Change the `<title>` and `data-page="..."` on the `<body>` tag.
-3. Replace everything inside `<main>…</main>` with the new content.
-4. Add a link to it in `components/header.js`.
-
-## Built with
-
-HTML, CSS, JavaScript and [Tailwind CSS](https://tailwindcss.com/) (CDN), with Font Awesome
-icons and the Outfit and Plus Jakarta Sans fonts. All animations respect the visitor's
-"reduce motion" setting.
+1. Create `pagename.php` in the main folder using the official address, in lowercase
+   (e.g. `vision-mission.php`).
+2. Copy `index.php` into it, set `$currentPage`, `$pageTitle` and `$pageDescription`.
+3. Put its sections in `sections/pagename/` and `require` them between `<main>` and `</main>`.
+4. Nothing else: menu links to that page now open it automatically.

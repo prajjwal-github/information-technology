@@ -1,8 +1,9 @@
 /* ==========================================================================
-   HEADER & FOOTER STYLES
-   Copied from the PCCOE Computer Department website so both departments
-   share the same header, footer and colour palette.
-   Do not change colours here; change them once in the :root block below.
+   GLOBAL STYLES + SHARED HEADER & FOOTER
+   Loaded on every page, after Bootstrap 5.
+   Header and footer design copied from the PCCOE Computer Department website
+   so both departments share the same header, footer and colour palette.
+   Change colours once in the :root block below.
    ========================================================================== */
 
 :root {
@@ -58,8 +59,6 @@
 /* Base Reset */
 *, *::before, *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html {
@@ -75,6 +74,14 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
+}
+
+/* Header & footer lists and headings manage their own spacing
+   (Bootstrap adds default margins and list padding). */
+.top-strip ul, .site-navigation ul, .site-master-footer ul,
+.brand-header h1, .brand-header h2, .site-master-footer p {
+  margin: 0;
+  padding: 0;
 }
 
 img {
@@ -100,13 +107,8 @@ button {
   background: none;
 }
 
-.container {
-  width: 100%;
-  max-width: 1380px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+@media (min-width: 1400px) {
+  .container { max-width: 1380px; }
 }
 
 /* ==========================================================================
@@ -819,72 +821,6 @@ button {
   font-weight: 700;
 }
 
-/* Modal Styling */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(4, 15, 29, 0.75);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1100;
-  opacity: 0;
-  visibility: hidden;
-  transition: all var(--transition-normal);
-  padding: 20px;
-}
-
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal-dialog {
-  background: #ffffff;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--pccoe-gold-primary);
-  max-width: 580px;
-  width: 100%;
-  overflow: hidden;
-}
-
-.modal-header {
-  padding: 14px 20px;
-  background: linear-gradient(90deg, var(--pccoe-navy-darkest) 0%, var(--pccoe-navy) 100%);
-  border-bottom: 2px solid var(--pccoe-gold-primary);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.modal-header h4 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin: 0;
-  color: var(--pccoe-gold-bright);
-}
-
-.modal-close-btn {
-  color: #ffffff;
-  font-size: 1.25rem;
-  line-height: 1;
-  opacity: 0.8;
-}
-
-.modal-close-btn:hover {
-  opacity: 1;
-  color: var(--pccoe-gold-bright);
-}
-
-.modal-body {
-  padding: 20px;
-  max-height: 75vh;
-  overflow-y: auto;
-}
-
 /* Back to Top */
 .back-to-top-btn {
   position: fixed;
@@ -1013,4 +949,129 @@ button {
   .brand-text-center { text-align: center; }
   .accreditation-ribbon { justify-content: center; }
   .footer-columns-grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   SHARED EXTRAS (every page)
+   ========================================================================== */
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2000;
+  background: var(--pccoe-gold-primary);
+  color: var(--pccoe-navy-darkest);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+}
+
+/* Thin gold reading-progress line at the very top */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--pccoe-gold-gradient);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  z-index: 2000;
+}
+
+/* Dark backdrop behind the mobile menu drawer */
+.mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 15, 29, 0.55);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+  z-index: 999; /* just below the menu bar (1000) so the drawer stays clickable */
+}
+.mobile-backdrop.show { opacity: 1; visibility: visible; }
+
+/* Footer department badge and social icons */
+.footer-dept-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--pccoe-gold-bright);
+  font-size: 1rem;
+}
+.footer-social { display: flex; gap: 10px; margin-top: 1rem; }
+.footer-social a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+.footer-social a:hover {
+  background: var(--pccoe-gold-primary);
+  color: var(--pccoe-navy-darkest);
+  transform: translateY(-2px);
+}
+
+/* Quick search pop-up (Bootstrap modal, styled like the Computer dept site) */
+.search-modal .modal-content {
+  border: 1px solid var(--pccoe-gold-primary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.search-modal .modal-header {
+  background: linear-gradient(90deg, var(--pccoe-navy-darkest) 0%, var(--pccoe-navy) 100%);
+  border-bottom: 2px solid var(--pccoe-gold-primary);
+  padding: 14px 20px;
+}
+.search-modal .modal-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--pccoe-gold-bright);
+}
+.search-input { padding: 12px 14px; border-radius: var(--radius-sm); margin-bottom: 12px; }
+.search-input:focus { border-color: var(--pccoe-navy-mid); box-shadow: 0 0 0 0.2rem rgba(2, 132, 199, 0.2); }
+.search-result {
+  display: block;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--bg-muted);
+  border-radius: 8px;
+}
+.search-result:hover, .search-result:focus { background: var(--pccoe-navy-wash); }
+.search-result-cat {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pccoe-gold-dark);
+}
+.search-result-title { display: block; font-weight: 700; color: var(--pccoe-navy-darkest); }
+.search-empty { text-align: center; color: var(--text-muted); padding: 20px; margin: 0; }
+
+/* Accessibility buttons in the top strip */
+body.text-large { zoom: 1.1; }
+body.contrast-high { filter: contrast(1.25) saturate(1.1); }
+
+/* Fade-up on scroll: add class="reveal" (optional data-delay="150") */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .spotlight-marquee { animation: none !important; }
+}
+
+@media (max-width: 640px) {
+  .accreditation-sep { display: none; }
+  .accreditation-ribbon { column-gap: 14px; }
 }
