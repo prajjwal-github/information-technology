@@ -1,103 +1,98 @@
-# PCCOE – Department of Information Technology Website
+# Department of Information Technology – PCCOE Website
 
-The revamped website of the **Department of Information Technology**, Pimpri Chinchwad College of
-Engineering (PCCOE), Pune. It uses the same header, footer and colour palette as the
-[Computer Department website](https://github.com/MayurKharat0390/PCCOE-Computer-Dept). The content
-is copied as it is from [it.pccoepune.com](https://it.pccoepune.com/); only the design is new.
+New design of the official IT department website (https://it.pccoepune.com/).
+All text, photos and documents are taken from the official site as they are;
+only the design is new. The header, footer and colours match the PCCOE
+Computer Department website.
 
-**Built with:** HTML5, CSS3, Bootstrap 5.3 and PHP (no database).
-
-**Status:** Home page (`index.php`) ready for approval. Other pages will be added after approval;
-until then their menu links open the page on the official site.
-
-## How to run it
-
-**On a PHP server (Apache, e.g. XAMPP or the college hosting):** copy the folder into the web root
-(for XAMPP, `htdocs/information-technology`) and open `http://localhost/information-technology/`.
-
-**Without XAMPP:** if PHP is installed, open a terminal in this folder and run
-
-```
-php -S localhost:8000 router.php
-```
-
-then open http://localhost:8000. An internet connection is needed for the fonts and icons.
-
-## Hosting on Netlify
-
-Netlify only serves plain HTML files and cannot run PHP. So `netlify.toml` tells Netlify to run
-`php build.php` first, which turns every PHP page into an HTML file in `dist/` and publishes that.
-Keep editing the PHP files; Netlify rebuilds the HTML on every push to GitHub.
-
-To make the HTML yourself (e.g. to drag and drop onto Netlify): run `php build.php` and upload
-the `dist/` folder. Never edit files inside `dist/`; they are overwritten on each build.
+**Technology: HTML5, CSS3 and Bootstrap 5 only.**
+No PHP, no database, no build step, nothing to install.
 
 ## Folder structure
 
 ```
 information-technology/
-├── index.php                  ← HOME PAGE: lists the page's parts in order
-│
-├── includes/                  ← Shared by every page (edit once, changes everywhere)
-│   ├── config.php             ← Contact details, MAIN MENU links, helper functions
-│   ├── head.php               ← <head>: title, fonts, Bootstrap, CSS files
-│   ├── header.php             ← Top strip, college logo header, main menu, spotlight ticker
-│   └── footer.php             ← Footer, back-to-top button, search pop-up, JS files
-│
-├── components/
-│   └── ui.php                 ← Reusable elements: section_title(), action_button()
-│
-├── sections/
-│   └── home/                  ← One file per Home page section (content is at the top of each)
-│       ├── hero-notices.php   ← Photo slider + Notices / News & Announcements
-│       ├── about.php          ← About us + Mandatory Disclosure and PCET Brochure
-│       ├── dept-glance.php    ← IT Department at Glance (3 cards)
-│       ├── testimonials.php   ← Student Testimonials + Important Links
-│       ├── honours-video.php  ← Honour & Minor Courses, Swaratarang 2k24, Video Section
-│       └── popup.php          ← FDP 2026 poster shown when the page opens
-│
+├── index.html                 Home page
+├── about.html                 one .html file per page (41 pages, see list below)
+├── ...
 ├── assets/
 │   ├── css/
-│   │   ├── style.css          ← Global styles + header & footer (from the Computer dept site)
-│   │   └── home.css           ← Home page styles
-│   ├── js/main.js             ← Menu, search (Ctrl + K), animations, notices scroll, pop-up
-│   ├── images/                ← Official photos and logos (see images/README.md)
-│   └── vendor/bootstrap/      ← Bootstrap 5.3.3 (stored locally)
-│
-├── .htaccess                  ← Keeps page addresses like the official site (/hod opens hod.php)
-├── build.php                  ← Turns the PHP pages into plain HTML in dist/ (for Netlify)
-├── netlify.toml               ← Netlify settings: run build.php, publish dist/
-├── router.php                 ← Same thing for the local `php -S` preview only
-└── README.md
+│   │   ├── style.css          colours, fonts, header and footer (every page)
+│   │   ├── home.css           home page only
+│   │   └── pages.css          all other pages (title banner, side menu, cards, tables)
+│   ├── js/
+│   │   ├── layout.js          header, main menu, spotlight line and footer (every page)
+│   │   └── main.js            small effects: mobile menu, search, back-to-top, font size
+│   ├── images/
+│   │   ├── logo/              PCCOE and PCET logos, favicon
+│   │   ├── home/              photos used on index.html
+│   │   └── <page-name>/       photos used on <page-name>.html
+│   └── vendor/bootstrap/      Bootstrap 5.3.3 (stored locally, works offline)
+├── .htaccess                  optional, Apache only: /about opens about.html
+└── _redirects                 optional, Netlify only: /Training -> /training
 ```
 
-## Page addresses (URLs)
+## How the header and footer work
 
-Addresses stay the same as on the official site, in lowercase: `/hod`, `/vision-mission`,
-`/faculty-profile`, and so on. A page is saved as `hod.php`, and `.htaccess` makes `/hod` open it.
-Old addresses with capital letters (such as `/Training`) redirect to the lowercase one.
+The header, main menu, "Spotlight" news line and footer are written **once**, in
+`assets/js/layout.js`. Every page has two empty boxes that this file fills:
 
-The menu links work out where to go by themselves (`page_url()` in `includes/config.php`): once
-`hod.php` exists, every link to `hod` opens the new page; until then it opens the official site.
+```html
+<div id="site-header"></div>   ...page content...   <div id="site-footer"></div>
+<script src="assets/js/layout.js"></script>
+```
 
-## Common edits
+So a change in `layout.js` (a new menu link, a new phone number) shows on all
+pages at once. It works on any web server and also when a page is opened by
+double-clicking the file, because it does not load anything else.
 
-| I want to…                           | Open this file                     | What to do |
-|--------------------------------------|------------------------------------|------------|
-| Change a menu link                   | `includes/config.php`              | Edit `$NAV_MENU` |
-| Change phone / email / address       | `includes/config.php`              | Edit `$SITE` |
-| Change the spotlight ticker          | `includes/header.php`              | Edit `$spotlight` at the top |
-| Add a notice / news item             | `sections/home/hero-notices.php`   | Add a line at the top of `$news` |
-| Change slider photos                 | `sections/home/hero-notices.php`   | Edit `$slides` (photos in `assets/images/slider/2024/`) |
-| Change testimonials                  | `sections/home/testimonials.php`   | Edit `$testimonials` |
-| Remove the opening pop-up poster     | `index.php`                        | Delete the `popup.php` line |
-| Change brand colours                 | `assets/css/style.css`             | Edit the `:root` block |
-| Make anything fade in on scroll      | any section                        | Add `class="reveal"` to the element |
+## How to update content
 
-## Adding a new page (after approval)
+| To change...                         | Edit                                                        |
+|--------------------------------------|-------------------------------------------------------------|
+| Text, tables, photos of a page       | that page's `.html` file, between `PAGE CONTENT START` and `PAGE CONTENT END` |
+| Menu links                           | `MENU` list at the top of `assets/js/layout.js`             |
+| Spotlight news line                  | `SPOTLIGHT` list in `assets/js/layout.js`                   |
+| Phone, email, address, map           | `SITE` block in `assets/js/layout.js`                       |
+| Home page notices                    | the "Notices" list in `index.html` (and `notices.html`)     |
+| Colours and fonts                    | `:root` block at the top of `assets/css/style.css`          |
+| A photo                              | put it in `assets/images/<page>/` and change the `src` in the page |
 
-1. Create `pagename.php` in the main folder using the official address, in lowercase
-   (e.g. `vision-mission.php`).
-2. Copy `index.php` into it, set `$currentPage`, `$pageTitle` and `$pageDescription`.
-3. Put its sections in `sections/pagename/` and `require` them between `<main>` and `</main>`.
-4. Nothing else: menu links to that page now open it automatically.
+**Add a new page:** copy any page (for example `about.html`), rename it,
+change the `<title>` and the `<h1>`, replace the content between the
+`PAGE CONTENT` markers, then add one line to `MENU` in `layout.js`.
+
+Content blocks use normal Bootstrap 5 classes (`card`, `card-header`,
+`card-body`, `table`, `accordion`, `row`/`col-md-*`), so a new block can be
+copied from any existing page.
+
+PDFs (syllabus, timetables, academic calendar, etc.) are still stored on
+https://it.pccoepune.com/ and the pages link to them there.
+
+## Run and deploy
+
+* **On your computer:** open `index.html` in a browser. That is all.
+  (Optional, for a local web address: `python -m http.server` in this folder,
+  then open http://localhost:8000.)
+* **On a server:** upload the whole folder (Apache, Nginx, IIS, college server).
+  No setup is needed. On Apache, `.htaccess` keeps the old addresses (`/about`).
+* **On Netlify:** drag and drop the folder (or the zip) at app.netlify.com/drop.
+  Netlify serves `about.html` at `/about` automatically.
+
+## Pages
+
+| Menu            | Pages |
+|-----------------|-------|
+| Home            | `index.html`, `notices.html` |
+| About us        | `about.html`, `vision-mission.html`, `hod.html`, `pso.html`, `bos.html` |
+| People          | `faculty-profile.html`, `admin-staff-profile.html` |
+| Academics       | `b-tech-it.html`, `m-tech-it.html`, `btechsyllabus.html`, `timetables.html`, `acalender.html` (Examination links to the PCCOE site) |
+| Research        | `research-coordinator-desk.html`, `patents-and-copyrights.html`, `publication.html`, `research-grants-publications.html`, `books-published.html`, `workshops-conferences.html`, `entrepreneurship-activities.html`, `consultancy-work.html`, `center-of-excellence.html`, `dcoe.html`, `iot.html` |
+| Student Corner  | `professional-chapters.html`, `student-dev-welfare.html`, `stud-achievements.html`, `pdc.html`, `itsa-event.html`, `higher-study-cell-events.html` |
+| Placements      | `placements.html`, `internships.html`, `alumini.html`, `training.html`, `mou.html` |
+| Facilities      | `infrastructure.html`, `research_facilities.html`, `library.html` |
+| Activities      | `activities.html` |
+| Contact         | `contact.html` |
+
+Page file names are the same as the official site addresses, in lowercase
+(`https://it.pccoepune.com/hod` → `hod.html`).

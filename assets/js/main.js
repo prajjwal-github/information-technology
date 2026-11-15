@@ -93,7 +93,7 @@ function initBackToTop() {
 
 /* 4. QUICK SEARCH (Ctrl + K) ---------------------------------------------- */
 /* The list (window.SEARCH_ITEMS) is built from the main menu in
-   includes/footer.php, so new menu links are searchable automatically.  */
+   assets/js/layout.js, so new menu links are searchable automatically.  */
 function initSearch() {
   const modalEl = document.getElementById('searchModal');
   const input = document.getElementById('siteSearchInput');

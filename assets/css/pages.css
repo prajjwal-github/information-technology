@@ -1,0 +1,256 @@
+/* ==========================================================================
+   INNER PAGES  (every page except the home page)
+   Loaded after style.css. Colours come from the :root block in style.css.
+
+   1. Page title banner      4. Tables
+   2. Side menu              5. Accordions, tabs, buttons
+   3. Content cards          6. Images, galleries, notices
+   ========================================================================== */
+
+/* 1. PAGE TITLE BANNER ---------------------------------------------------- */
+.page-banner {
+  position: relative;
+  overflow: hidden;
+  padding: 2.75rem 0 2.25rem;
+  background: linear-gradient(120deg, var(--pccoe-navy-darkest) 0%, var(--pccoe-navy) 55%, var(--pccoe-navy-royal) 100%);
+  color: #fff;
+}
+.page-banner::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 4px;
+  background: var(--pccoe-gold-gradient);
+}
+.page-banner-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+.page-banner .breadcrumb { margin: 0; font-size: 0.9rem; }
+.page-banner .breadcrumb-item,
+.page-banner .breadcrumb-item a { color: rgba(255, 255, 255, 0.85); text-decoration: none; }
+.page-banner .breadcrumb-item a:hover { color: var(--pccoe-gold-bright); }
+.page-banner .breadcrumb-item.active { color: var(--pccoe-gold-bright); font-weight: 600; }
+.page-banner .breadcrumb-item + .breadcrumb-item::before { color: rgba(255, 255, 255, 0.6); }
+
+.page-body { padding: 2.5rem 0 4rem; }
+
+/* 2. SIDE MENU ------------------------------------------------------------ */
+.side-menu {
+  position: sticky;
+  top: 90px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.side-menu-title {
+  background: var(--pccoe-navy);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 3px solid var(--pccoe-gold-primary);
+}
+.side-menu-list { list-style: none; margin: 0; padding: 0.4rem 0; }
+.side-menu-list a {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.65rem 1.2rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.93rem;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.side-menu-list a i { color: var(--pccoe-gold-primary); font-size: 0.8rem; }
+.side-menu-list a:hover { background: var(--pccoe-navy-wash); color: var(--pccoe-navy); }
+.side-menu-list a.active {
+  background: var(--pccoe-navy-subtle);
+  color: var(--pccoe-navy-darkest);
+  font-weight: 700;
+  border-left-color: var(--pccoe-gold-primary);
+}
+@media (max-width: 991.98px) {
+  .side-menu { position: static; }
+}
+
+/* 3. CONTENT CARDS -------------------------------------------------------- */
+.page-content { color: var(--text-secondary); min-width: 0; }
+.page-content > .card,
+.page-content > div > .card { margin-bottom: 1.75rem; }
+.page-content .card {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+.page-content .card .card { box-shadow: var(--shadow-xs); border-radius: var(--radius-md); }
+.page-content .card-header {
+  background: var(--pccoe-navy);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.9rem 1.25rem;
+  margin: 0;
+  border-bottom: 3px solid var(--pccoe-gold-primary);
+}
+.page-content .card .card .card-header { font-size: 0.95rem; background: var(--pccoe-navy-royal); }
+.page-content .card-body { padding: 1.4rem; }
+.page-content .card-title { color: var(--pccoe-navy-darkest); font-family: var(--font-display); font-weight: 700; }
+.page-content h2, .page-content h3, .page-content h4, .page-content h5, .page-content h6 { color: var(--pccoe-navy-darkest); }
+.page-content p, .page-content li { line-height: 1.75; }
+.page-content a { color: var(--pccoe-navy-royal); }
+.page-content a:hover { color: var(--pccoe-gold-dark); }
+.text-justify { text-align: justify; }
+.page-content hr { border-color: var(--border-medium); opacity: 1; }
+.page-content .list-group-item { border-color: var(--border-light); }
+
+/* 4. TABLES --------------------------------------------------------------- */
+.page-content .table-responsive { margin-bottom: 1rem; border-radius: var(--radius-md); }
+.page-content .table { margin-bottom: 0; font-size: 0.92rem; vertical-align: middle; }
+.page-content .table > thead th,
+.page-content .table > thead td {
+  background: var(--pccoe-navy-subtle);
+  color: var(--pccoe-navy-darkest);
+  font-weight: 700;
+  border-bottom: 2px solid var(--pccoe-navy-mid);
+}
+.page-content .table > tbody > tr:hover > * { background: var(--pccoe-navy-wash); }
+.page-content .table th[scope] { color: var(--pccoe-navy-darkest); width: 32%; }
+
+/* 5. ACCORDIONS, TABS, BUTTONS ------------------------------------------- */
+.page-content .accordion-item { border-color: var(--border-light); }
+.page-content .accordion-button {
+  font-weight: 600;
+  color: var(--pccoe-navy-darkest);
+  background: var(--bg-surface);
+}
+.page-content .accordion-button:not(.collapsed) {
+  background: var(--pccoe-navy-subtle);
+  color: var(--pccoe-navy-darkest);
+  box-shadow: inset 3px 0 0 var(--pccoe-gold-primary);
+}
+.page-content .accordion-button:focus { box-shadow: 0 0 0 0.2rem rgba(2, 132, 199, 0.25); }
+.page-content .nav-tabs .nav-link,
+.page-content .nav-pills .nav-link { color: var(--pccoe-navy); font-weight: 600; }
+.page-content .nav-tabs .nav-link.active,
+.page-content .nav-pills .nav-link.active { background: var(--pccoe-navy); color: #fff; }
+
+.page-content .btn { border-radius: var(--radius-full); font-weight: 600; }
+.page-content .btn-primary,
+.page-content .btn-info {
+  background: var(--pccoe-navy);
+  border-color: var(--pccoe-navy);
+  color: #fff;
+}
+.page-content .btn-primary:hover,
+.page-content .btn-info:hover {
+  background: var(--pccoe-navy-darkest);
+  border-color: var(--pccoe-navy-darkest);
+  color: var(--pccoe-gold-bright);
+}
+/* "View document" buttons (PDF links) */
+.btn-it-doc {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0;
+  background: var(--pccoe-gold-gradient);
+  color: var(--pccoe-navy-darkest) !important;
+  font-weight: 700;
+}
+.btn-it-doc:hover { filter: brightness(0.95); }
+/* Round download icons (syllabus, timetables) */
+.icon-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--pccoe-navy);
+  color: #fff !important;
+  text-decoration: none;
+}
+.icon-btn:hover { background: var(--pccoe-gold-primary); color: var(--pccoe-navy-darkest) !important; }
+
+/* 6. IMAGES, GALLERIES, NOTICES ----------------------------------------- */
+.page-content img { max-width: 100%; height: auto; border-radius: var(--radius-sm); }
+.page-content .text-center img,
+.page-content img.mx-auto { margin-left: auto; margin-right: auto; }
+.page-content .card-img-top { border-radius: 0; }
+.page-content .img-cover { object-fit: cover; }
+.page-content .carousel { border-radius: var(--radius-md); overflow: hidden; margin-bottom: 1rem; }
+.page-content .carousel-item img { width: 100%; max-height: 520px; object-fit: contain; background: var(--bg-muted); }
+.page-content video { max-width: 100%; border-radius: var(--radius-md); }
+
+/* Company logo grids (placements, internships) */
+.pic-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.pic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+}
+.pic img { width: 100%; height: 64px; object-fit: contain; }
+
+/* Center of Excellence cards */
+.coe-card { width: 100%; max-width: 440px; border-radius: var(--radius-md); background: #fff; }
+.coe-img { width: 130px; height: 130px; object-fit: contain; }
+
+/* Notices page */
+.notice-list { list-style: none; margin: 0; padding: 0; }
+.notice-item {
+  display: flex;
+  gap: 10px;
+  padding: 12px 6px;
+  border-bottom: 1px dashed var(--border-light);
+  line-height: 1.5;
+}
+.notice-item:last-child { border-bottom: 0; }
+.notice-icon { color: var(--pccoe-gold-primary); margin-top: 4px; flex-shrink: 0; }
+.notice-text a { color: var(--pccoe-navy); font-weight: 500; }
+/* Spacing between cards comes from CSS, not from <br> tags */
+.page-content > br, .page-content > div > br { display: none; }
+
+/* Logo cards with a "Click Here" link (student chapters, associations) */
+.chapter-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1.25rem;
+  margin: 1.25rem 0;
+}
+.chapter-container .w20 { text-align: center; }
+.chapter-container .border-box {
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs);
+  padding: 1rem;
+}
+.chapter-container .border-box img { height: 110px; width: 100%; object-fit: contain; }
+.chapter-container .heading_h3h { font-size: 0.95rem; font-weight: 700; margin-top: 0.6rem; color: var(--pccoe-navy); }
+.page-content > .card-header { border-radius: var(--radius-md) var(--radius-md) 0 0; }

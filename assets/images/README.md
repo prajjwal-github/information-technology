@@ -2,15 +2,17 @@
 
 All photos come from the official IT department website (https://it.pccoepune.com/).
 
-| Folder / file     | Used on                                                             |
-|-------------------|---------------------------------------------------------------------|
-| `slider/2024/`    | Home page photo slider (same folder name as the official site)      |
-| `testimonials/`   | Photos in the Home page "Student Testimonials"                      |
-| `events/`         | FDP 2026 pop-up poster, INNOVEDA 2026 poster, Swaratarang 2k24 poster |
-| `hod.jpg`         | "From HOD's Desk" card                                              |
-| `logo/`           | PCCOE and PCET logos (header), IT department logo card, favicon     |
+Each page has its own folder, named like the page file:
 
-To swap a photo, replace the file with one of the same name, or change the file
-name in the matching `sections/home/*.php` file. If the Swaratarang poster or a
-card photo is missing, the page still looks complete (that block is hidden or
-shows an icon instead).
+| Folder                            | Used on                                   |
+|-----------------------------------|-------------------------------------------|
+| `home/`                           | `index.html` (slider, testimonials, posters, HOD photo) |
+| `faculty-profile/`                | `faculty-profile.html`                    |
+| `placements/`                     | `placements.html` (also company logos on `internships.html`) |
+| `activities/`                     | `activities.html`                         |
+| ... and so on                     | one folder per page                       |
+| `logo/`                           | PCCOE / PCET logos in the header, favicon |
+
+To change a photo: put the new file in the page's folder and change the
+`src="assets/images/<page>/<file>"` in that page's HTML file.
+Keep photos small (under 300 KB; `.webp` or `.jpg`, about 1600 px wide is enough).
